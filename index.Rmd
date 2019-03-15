@@ -1,6 +1,5 @@
 ---
-title: "Big Cities Health Inventory Data Visualization"
-author: "Brendan Cullen"
+title: "Big Cities Health Inventory Data Viz"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -22,10 +21,10 @@ library(fontawesome)
 
 # About {data-icon="fa-info-circle"}
 
-![](bchc logo.png)
+[![](bchc logo.png)](http://www.bigcitieshealth.org/)
 
 
-```{r import data}
+```{r import data, warning=FALSE}
 data_raw <- import("http://bchi.bigcitieshealth.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBGdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c6b5c30fbd8b79859797e1dc260a06064c8f3864/Current%20BCHI%20Platform%20Dataset%20(7-18)%20-%20Updated%20BCHI%20Platform%20Dataset%20-%20BCHI,%20Phase%20I%20&%20II.csv?disposition=attachment")
 
 # wrangle data
@@ -46,7 +45,7 @@ Sidebar {.sidebar}
 -------------------------------
 First plot text
 
-```{r}
+```{r, warning}
 # wrangle data
 data_obesity <- data_filt %>% 
   filter(shortened_indicator_name == "Adult Obesity") %>% 
@@ -91,6 +90,8 @@ data_obesity %>%
   coord_flip()
 ```
 
+> Here's some text for V1
+
 ### Version 2
 
 ```{r}
@@ -102,6 +103,8 @@ data_obesity %>%
   labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL) + 
   theme_minimal()
 ```
+
+> Here's some text for V2
 
 ### Version 3
 
@@ -121,6 +124,8 @@ data_obesity %>%
   geom_hline(yintercept = data_obesity$avg_obesity[which(data_obesity$place == "U.S. Total")], linetype = 2) + 
   theme(legend.position = "none")
 ```
+
+> Here's some text for V3
 
 ### Version 4
 
@@ -143,6 +148,7 @@ data_obesity %>%
   theme(legend.position = "none")
 ```
 
+> Here's some text for V4
 
 # Obesity x Heart Disease {data-icon="fa-heartbeat"}
 
