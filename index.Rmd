@@ -35,8 +35,8 @@ data_filt <- data_raw %>%
 ```
 
 
-Obesity by City {data-icon="fa-city"}
-===============================
+# Obesity by City {data-icon="fa-map-marker-alt"}
+
 
 ```{r}
 # wrangle data
@@ -136,7 +136,7 @@ data_obesity %>%
 ```
 
 
-# Obesity x Heart Disease
+# Obesity x Heart Disease {data-icon="fa-heartbeat"}
 
 ```{r}
 # wrangle data
@@ -203,7 +203,7 @@ obesity_hdmr %>%
   theme_minimal()
 ```
 
-# Opioid Deaths
+# Opioid-related Deaths {data-icon="fa-pills"}
 
 ```{r}
 # wrangle data
