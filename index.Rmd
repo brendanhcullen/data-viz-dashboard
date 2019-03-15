@@ -1,5 +1,6 @@
 ---
 title: "Data Viz Final Project"
+author: "Brendan Cullen"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -37,6 +38,9 @@ data_filt <- data_raw %>%
 
 # Obesity by City {data-icon="fa-map-marker-alt"}
 
+Sidebar {.sidebar}
+-------------------------------
+First plot text
 
 ```{r}
 # wrangle data
@@ -138,6 +142,10 @@ data_obesity %>%
 
 # Obesity x Heart Disease {data-icon="fa-heartbeat"}
 
+Sidebar {.sidebar}
+-------------------------------
+Second plot text
+
 ```{r}
 # wrangle data
 obesity_hdmr <- data_filt %>%
@@ -204,6 +212,11 @@ obesity_hdmr %>%
 ```
 
 # Opioid-related Deaths {data-icon="fa-pills"}
+
+Sidebar {.sidebar}
+-------------------------------
+Second plot text
+
 
 ```{r}
 # wrangle data
