@@ -1,5 +1,5 @@
 ---
-title: "Data Viz Final Project"
+title: "Big Cities Health Inventory Data Visualization"
 author: "Brendan Cullen"
 output: 
   flexdashboard::flex_dashboard:
@@ -19,6 +19,10 @@ library(magrittr)
 library(ggrepel)
 library(fontawesome)
 ```
+
+# About {data-icon="fa-info-circle"}
+
+![](bchc logo.png)
 
 
 ```{r import data}
