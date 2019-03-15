@@ -153,39 +153,138 @@ Column {data-width=650}
 
 ### Final plot
 
-```{r Plot Obesity rates by city, warning=FALSE}
+```{r}
+## 3 most obese cities
+top_3_obese <- obesity_hdmr %>% 
+  top_n(3, avg_obesity)
 
-# wrangle data
-data_obesity <- data_filt %>% 
-  filter(shortened_indicator_name == "Adult Obesity") %>% 
-  spread(shortened_indicator_name, value) %>% 
-  group_by(place) %>% 
-  summarise(avg_obesity = mean(`Adult Obesity`, na.rm = TRUE),
-            se_obesity = sundry::se(`Adult Obesity`))
+## 3 least obese cities
+bottom_3_obese <- obesity_hdmr %>% 
+  top_n(-3, avg_obesity)
+
+obesity_hdmr %>% 
+  ggplot(aes(avg_obesity, avg_hdmr)) + 
+  geom_point(size = 5, alpha = 0.7, color = "gray70") +
+  geom_point(data = top_3_obese, size = 5, color = "#ABCFF7") +
+  geom_point(data = bottom_3_obese, size = 5, color = "#BA4A00") +
+  geom_smooth(method = "lm", alpha = 0.2, color = "black") +
+  geom_text_repel(data = top_3_obese, aes(label = place), min.segment.length = 0) +
+  geom_text_repel(data = bottom_3_obese, aes(label = place), min.segment.length = 0) +
+  theme_minimal() + 
+  scale_x_continuous(labels = scales::percent_format(scale = 1)) + 
+  labs(x = "Percent Obese", y = "Heart Disease Mortality Rate", title = "Relationship between Obesity and Heart Disease", subtitle = "State labels represent 3 most/least obese states", caption = "3 most/least obese states are colored red/green, respectively. \n Heart Disease Mortality Rate is age-adjusted per 100,000 people.")
 ```
- 
+
 
 Column {.tabset data-width=350}
 -----------------------------------------------------------------------
 
 ### Version 1
 
+```{r}
+obesity_hdmr %>% 
+  ggplot(aes(avg_obesity, avg_hdmr)) + 
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
 ### Version 2
 
-### Version 3
+```{r}
+obesity_hdmr %>% 
+  ggplot(aes(avg_obesity, avg_hdmr)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  geom_text_repel(aes(label = place)) + 
+  theme_minimal()
+```
 
 # Opioid Deaths
+
+```{r}
+# wrangle data
+data_opioid <- data_raw %>% 
+  clean_names() %>% 
+  select(shortened_indicator_name, year, sex, race_ethnicity, value, place) %>% 
+  filter(shortened_indicator_name %in% c("Opioid-Related Overdose Mortality Rate")) %>% 
+  mutate(value = as.numeric(value)) %>% 
+  mutate_at(c("sex", "race_ethnicity", "place"), factor) %>% 
+  na.omit()
+
+# identify city with highest opioid-related overdose mortality rate from 2010 to 2016
+top_opioid = data_opioid %>% 
+  filter(sex == "Both",
+         race_ethnicity == "All",
+         place != "U.S. Total",
+         year %in% 2010:2016) %>% 
+  unique() %>% 
+  spread(shortened_indicator_name, value) %>% 
+  group_by(place) %>% 
+  summarize(mean_opioid = mean(`Opioid-Related Overdose Mortality Rate`, na.rm = TRUE)) %>% 
+  top_n(1) %>% 
+  select(place)
+```
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
 ### Final plot
 
+```{r}
+data_opioid %>% 
+  filter(sex != "Both", 
+         race_ethnicity == "All",
+         place == top_opioid$place,
+         year %in% 2010:2016) %>% 
+  spread(shortened_indicator_name, value) %>% 
+  ggplot(aes(year, `Opioid-Related Overdose Mortality Rate`, color= sex)) + 
+  geom_line(size= 2) +
+  geom_point(size = 4) + 
+  labs(x = NULL, y = "Opioid-Related Overdose Mortality Rate", title = "Opioid-use Related Mortality Rates Over Time", subtitle = "Colombus, OH", caption = "Rates are age-adjusted per 100,000 people.") + 
+  theme_minimal() + 
+  scale_color_OkabeIto() +
+  theme(legend.position = "none") +
+  geom_label(data = data_opioid %>% 
+  filter(sex != "Both", 
+         race_ethnicity == "All",
+         place == top_opioid$place,
+         year == 2016) %>% 
+         spread(shortened_indicator_name, value), 
+         aes(y =`Opioid-Related Overdose Mortality Rate`, label = sex),
+         nudge_x = -0.6,
+         size = 5) 
+```
+
 Column {.tabset data-width=350}
 -----------------------------------------------------------------------
 
 ### Version 1
 
+```{r}
+data_opioid %>% 
+  filter(sex != "Both", 
+         race_ethnicity == "All",
+         place == top_opioid$place,
+         year %in% 2010:2016) %>% 
+  spread(shortened_indicator_name, value) %>% 
+  ggplot(aes(year, `Opioid-Related Overdose Mortality Rate`, color= sex)) + 
+  geom_line() 
+```
+
+
 ### Version 2
 
-### Version 3
+```{r}
+data_opioid %>% 
+  filter(sex != "Both", 
+         race_ethnicity == "All",
+         place == top_opioid$place,
+         year %in% 2010:2016) %>% 
+  spread(shortened_indicator_name, value) %>% 
+  ggplot(aes(year, `Opioid-Related Overdose Mortality Rate`, color= sex)) + 
+  geom_line(size= 2) +
+  geom_point(size = 4) + 
+  labs(x = NULL, y = "Opioid-Related Overdose Mortality Rate", title = "Opioid-use Related Mortality Rates Over Time", subtitle = "Colombus, OH", caption = "Rates are age-adjusted per 100,000 people.") + 
+  theme_minimal() 
+```
+
