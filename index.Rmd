@@ -8,29 +8,131 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+library(tidyverse)
+library(rio)
+library(colorblindr)
+library(janitor)
+library(magrittr)
+library(ggrepel)
 ```
+
+
+```{r import data}
+data_raw <- import("http://bchi.bigcitieshealth.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBGdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c6b5c30fbd8b79859797e1dc260a06064c8f3864/Current%20BCHI%20Platform%20Dataset%20(7-18)%20-%20Updated%20BCHI%20Platform%20Dataset%20-%20BCHI,%20Phase%20I%20&%20II.csv?disposition=attachment")
+
+# wrangle data
+data_filt <- data_raw %>% 
+  clean_names() %>% 
+  select(shortened_indicator_name, year, sex, race_ethnicity, value, place) %>% 
+  filter(shortened_indicator_name %in% c("Adult Physical Activity Levels", "Teen Physical Activity Levels", "Adult Binge Drinking","Adult Obesity","Heart Disease Mortality Rate","Bike Score","Walkability","Median Household Income","Race/Ethnicity","Death Rate (Overall)")) %>% 
+  mutate(value = as.numeric(value)) %>% 
+  mutate_at(c("sex", "race_ethnicity", "place"), factor) %>% 
+ mutate(place = plyr::mapvalues(x = .$place, from = c("Fort Worth (Tarrant County), TX", "Indianapolis (Marion County), IN", "Las Vegas (Clark County), NV", "Miami (Miami-Dade County), FL", "Oakland (Alameda County), CA", "Portland (Multnomah County), OR"), to = c("Fort Worth, TX", "Indianapolis, IN", "Las Vegas, NV", "Miami, FL", "Oakland, CA", "Portland, OR"))) %>% 
+  na.omit()
+```
+
+
+# Obesity
+
+```{r Plot Obesity rates by city, warning=FALSE}
+
+# wrangle data
+data_obesity <- data_filt %>% 
+  filter(shortened_indicator_name == "Adult Obesity") %>% 
+  spread(shortened_indicator_name, value) %>% 
+  group_by(place) %>% 
+  summarise(avg_obesity = mean(`Adult Obesity`, na.rm = TRUE),
+            se_obesity = sundry::se(`Adult Obesity`))
+```
+ 
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Final plot
 
 ```{r}
+data_obesity %>% 
+  mutate(compare_us_tot = ifelse(
+    avg_obesity > .$avg_obesity[which(data_obesity$place == "U.S. Total")], "above",
+    ifelse(avg_obesity < .$avg_obesity[which(data_obesity$place == "U.S. Total")], "below", "avg"))) %>% 
+  ggplot(aes(fct_reorder(place, avg_obesity), avg_obesity)) + 
+  geom_col(aes(fill = compare_us_tot), alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) + 
+  scale_fill_manual(values = c("#BA4A00", "black", "#ABCFF7")) +
+  labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL, caption = "States above the U.S. average are colored red. States below the U.S. average are colored green.") + 
+  theme_minimal() + 
+  geom_hline(yintercept = data_obesity$avg_obesity[which(data_obesity$place == "U.S. Total")], linetype = 2) + 
+  theme(legend.position = "none")
 
 ```
 
-Column {data-width=350}
+Column {.tabset data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Version 1
 
 ```{r}
-
+data_obesity %>% 
+  ggplot(aes(fct_reorder(place, avg_obesity), avg_obesity)) + 
+  geom_col() +
+  coord_flip()
 ```
 
-### Chart C
+### Version 2
 
 ```{r}
-
+data_obesity %>% 
+  ggplot(aes(fct_reorder(place, avg_obesity), avg_obesity)) + 
+  geom_col() + 
+  coord_flip() +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) + 
+  labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL) + 
+  theme_minimal()
 ```
 
+### Version 3
+
+```{r}
+data_obesity %>% 
+  mutate(compare_us_tot = ifelse(
+    avg_obesity > .$avg_obesity[which(data_obesity$place == "U.S. Total")], "above",
+    ifelse(avg_obesity < .$avg_obesity[which(data_obesity$place == "U.S. Total")], "below", "avg"))) %>% 
+  ggplot(aes(fct_reorder(place, avg_obesity), avg_obesity)) + 
+  geom_segment(aes(color = compare_us_tot, x = fct_reorder(place, avg_obesity), xend = place, y=0, yend = avg_obesity), size = 1, alpha = 0.7) +
+  geom_point(aes(color = compare_us_tot), size = 3, alpha = 0.7) +
+  coord_flip() +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) + 
+  scale_color_manual(values = c("#BA4A00", "black", "#ABCFF7")) +
+  labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL, caption = "States above the U.S. average are colored red. States below the U.S. average are colored green.") + 
+  theme_minimal() + 
+  geom_hline(yintercept = data_obesity$avg_obesity[which(data_obesity$place == "U.S. Total")], linetype = 2) + 
+  theme(legend.position = "none")
+```
+
+### Version 4
+
+```{r}
+data_obesity %>% 
+  mutate(compare_us_tot = ifelse(
+    avg_obesity > .$avg_obesity[which(data_obesity$place == "U.S. Total")], "above",
+    ifelse(avg_obesity < .$avg_obesity[which(data_obesity$place == "U.S. Total")], "below", "avg"))) %>% 
+  ggplot(aes(fct_reorder(place, avg_obesity), avg_obesity)) + 
+  geom_errorbar(aes(ymin = avg_obesity - 1.96*se_obesity,
+                    ymax = avg_obesity + 1.96*se_obesity),
+                    color = "gray40") +
+  geom_point(aes(color = compare_us_tot), size = 4, alpha = 0.7) +
+  coord_flip() +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) + 
+  scale_color_manual(values = c("#BA4A00", "black", "#ABCFF7")) +
+  labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL, caption = "States above the U.S. average are colored red. States below the U.S. average are colored green.") + 
+  theme_minimal() + 
+  geom_hline(yintercept = data_obesity$avg_obesity[which(data_obesity$place == "U.S. Total")], linetype = 2) + 
+  theme(legend.position = "none")
+```
+
+
+# Obesity x Heart Disease
+
+# Opioid Deaths
