@@ -252,7 +252,7 @@ data_opioid %>%
          year == 2016) %>% 
          spread(shortened_indicator_name, value), 
          aes(y =`Opioid-Related Overdose Mortality Rate`, label = sex),
-         nudge_x = -0.6,
+         nudge_x = -0.7,
          size = 5) 
 ```
 
