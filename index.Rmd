@@ -34,8 +34,7 @@ data_filt <- data_raw %>%
 
 # Obesity
 
-```{r Plot Obesity rates by city, warning=FALSE}
-
+```{r}
 # wrangle data
 data_obesity <- data_filt %>% 
   filter(shortened_indicator_name == "Adult Obesity") %>% 
@@ -135,4 +134,58 @@ data_obesity %>%
 
 # Obesity x Heart Disease
 
+```{r}
+# wrangle data
+obesity_hdmr <- data_filt %>%
+  filter(shortened_indicator_name %in% c("Adult Obesity", "Heart Disease Mortality Rate"),
+         sex == "Both",
+         race_ethnicity == "All",
+         place != "U.S. Total") %>%
+  mutate(i = row_number()) %>%
+  spread(shortened_indicator_name, value) %>%
+  group_by(place) %>%
+  summarize(avg_obesity =  mean(`Adult Obesity`, na.rm = TRUE),
+            avg_hdmr = mean(`Heart Disease Mortality Rate`, na.rm = TRUE))
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Final plot
+
+```{r Plot Obesity rates by city, warning=FALSE}
+
+# wrangle data
+data_obesity <- data_filt %>% 
+  filter(shortened_indicator_name == "Adult Obesity") %>% 
+  spread(shortened_indicator_name, value) %>% 
+  group_by(place) %>% 
+  summarise(avg_obesity = mean(`Adult Obesity`, na.rm = TRUE),
+            se_obesity = sundry::se(`Adult Obesity`))
+```
+ 
+
+Column {.tabset data-width=350}
+-----------------------------------------------------------------------
+
+### Version 1
+
+### Version 2
+
+### Version 3
+
 # Opioid Deaths
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Final plot
+
+Column {.tabset data-width=350}
+-----------------------------------------------------------------------
+
+### Version 1
+
+### Version 2
+
+### Version 3
