@@ -95,7 +95,9 @@ data_filt <- data_raw %>%
 
 Sidebar {.sidebar}
 -------------------------------
-First plot text
+**Plot #1**
+
+This plot represents obesity rates per city averaged across all years in the dataset (2010-2018).
 
 ```{r, warning}
 # wrangle data
@@ -104,7 +106,9 @@ data_obesity <- data_filt %>%
   spread(shortened_indicator_name, value) %>% 
   group_by(place) %>% 
   summarise(avg_obesity = mean(`Adult Obesity`, na.rm = TRUE),
-            se_obesity = sundry::se(`Adult Obesity`))
+            sd_obesity = sd(`Adult Obesity`),
+                            n = n()) %>% 
+  mutate(se_obesity = sd_obesity/(sqrt(n)))
 ```
  
 
@@ -137,12 +141,12 @@ Column {.tabset data-width=350}
 
 ```{r}
 data_obesity %>% 
-  ggplot(aes(fct_reorder(place, avg_obesity), avg_obesity)) + 
+  ggplot(aes(place, avg_obesity, avg_obesity)) + 
   geom_col() +
   coord_flip()
 ```
 
-> Here's some text for V1
+> Here is the first pass at the plot.
 
 ### Version 2
 
