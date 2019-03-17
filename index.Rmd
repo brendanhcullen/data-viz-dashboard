@@ -23,22 +23,23 @@ library(fontawesome)
 
 Sidebar {.sidebar}
 -------------------------------
-Background text
+The [Big Cities Health Coalition](https://twitter.com/bigcitieshealth?lang=en) (BCHC) is a large-scale collaboration among the health departments of the 30 biggest cities in the United States. See the BCHC's [informational brochure](https://static1.squarespace.com/static/534b4cdde4b095a3fb0cae21/t/5c7fc5cd6e9a7f44b5abf311/1551877582500/BCHC_ABOUT+US.pdf) for more details. 
+
+
 
 Row {data-height=600}
 -----------------------------------------------------------------------
 ### Title {.no-title}
-
+<center>
 Click the image below for more information:
 
-<center>
 [![](bchc_logo_big.png)](http://www.bigcitieshealth.org/)
 </center>
 
 ### Title {.no-title}
-A bunch of text here.
-
 <center>
+Cities included in the BCHC. Click the map below for more information on city membership criteria. 
+
 [![](cities_map.png)](http://www.bigcitieshealth.org/about-us-big-cities-health-coalition-bchc)
 </center>
 
