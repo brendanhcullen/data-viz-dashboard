@@ -81,7 +81,7 @@ data_filt <- data_raw %>%
 ```
 
 
-# Obesity Rates {data-icon="fa-weight"}
+# Obesity x City {data-icon="fa-weight"}
 
 Sidebar {.sidebar}
 -------------------------------
@@ -192,7 +192,7 @@ data_obesity %>%
 
 > Here's some text for V4
 
-# Obesity x Heart Disease {data-icon="fa-heartbeat"}
+# Heart Disease x Obesity {data-icon="fa-heartbeat"}
 
 Sidebar {.sidebar}
 -------------------------------
@@ -263,7 +263,7 @@ obesity_hdmr %>%
   theme_minimal()
 ```
 
-# Opioid-related Deaths {data-icon="fa-tablets"}
+# Opioid Deaths x Gender {data-icon="fa-tablets"}
 
 Sidebar {.sidebar}
 -------------------------------
