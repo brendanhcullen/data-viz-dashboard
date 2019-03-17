@@ -46,23 +46,23 @@ Row {data-height=300}
 -----------------------------------------------------------------------
 ### Title {.no-title}
 <center>
-**Obesity rates x City**
+**Obesity Rates**
 
-![](obesity.png)
+[![](obesity.png)](http://www.bigcitieshealth.org/obesity-physical-activity)
 </center>
 
 ### Title {.no-title}
 <center>
-**Heart disease mortality rate x Obesity **
+**Heart Disease Mortality Rate**
 
-![](heart.png)
+[![](heart.png)](https://bchi.bigcitieshealth.org/indicators/1834/searches/22955)
 </center>
 
 ### Title {.no-title}
 <center>
-**Opioid-related mortality rate x Gender**
+**Opioid-Related Mortality Rate**
 
-![](opioid.png)
+[![](opioid.png)](http://www.bigcitieshealth.org/combatting-opioids)
 </center>
 
 
