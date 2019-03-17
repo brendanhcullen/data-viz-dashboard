@@ -43,25 +43,32 @@ Cities included in the BCHC. Click the map below for more information on city me
 [![](cities_map.png)](http://www.bigcitieshealth.org/about-us-big-cities-health-coalition-bchc)
 </center>
 
+Row {data-height=90}
+-----------------------------------------------------------------------
+### Title {.no-title}
+<center>
+**KEY VARIABLES OF INTEREST:**
+
+
 Row {data-height=300}
 -----------------------------------------------------------------------
 ### Title {.no-title}
 <center>
-**Obesity Rates**
+*Obesity Rates*
 
 [![](obesity.png)](http://www.bigcitieshealth.org/obesity-physical-activity)
 </center>
 
 ### Title {.no-title}
 <center>
-**Heart Disease Mortality Rate**
+*Heart Disease Mortality Rate*
 
 [![](heart.png)](https://bchi.bigcitieshealth.org/indicators/1834/searches/22955)
 </center>
 
 ### Title {.no-title}
 <center>
-**Opioid-Related Mortality Rate**
+*Opioid-Related Mortality Rate*
 
 [![](opioid.png)](http://www.bigcitieshealth.org/combatting-opioids)
 </center>
