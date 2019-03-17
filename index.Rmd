@@ -23,24 +23,26 @@ library(fontawesome)
 
 Sidebar {.sidebar}
 -------------------------------
-The [Big Cities Health Coalition](https://twitter.com/bigcitieshealth?lang=en) (BCHC) is a large-scale collaboration among the health departments of the 30 biggest cities in the United States. See the BCHC's [informational brochure](https://static1.squarespace.com/static/534b4cdde4b095a3fb0cae21/t/5c7fc5cd6e9a7f44b5abf311/1551877582500/BCHC_ABOUT+US.pdf) for more details. 
+**Background**
 
+The [Big Cities Health Coalition](https://twitter.com/bigcitieshealth?lang=en) (BCHC) is a large-scale collaboration among 30 of the largest urban health departments in the United States. See the BCHC's [informational brochure](https://static1.squarespace.com/static/534b4cdde4b095a3fb0cae21/t/5c7fc5cd6e9a7f44b5abf311/1551877582500/BCHC_ABOUT+US.pdf) for more details. You can download the complete dataset [here](http://bchi.bigcitieshealth.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBGdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c6b5c30fbd8b79859797e1dc260a06064c8f3864/Current%20BCHI%20Platform%20Dataset%20(7-18)%20-%20Updated%20BCHI%20Platform%20Dataset%20-%20BCHI,%20Phase%20I%20&%20II.csv?disposition=attachment), which contains over 30,000 data points on a large variety of health indicators, e.g., behavioral health & substance abuse, chronic disease, environmental health, and life expectancy.  
 
+This project includes only a tiny fraction of the available BCHC data, focusing in particular on **obesity rate**, **heart disease mortality rate**, and **opioid-related mortality**. Click on the icons to the right for more information on these variables. The goal of this project is provide three data visualizations using these variables and document different iterations of these visualizations. 
 
 Row {data-height=600}
 -----------------------------------------------------------------------
 ### Title {.no-title}
 <center>
-Click the image below for more information:
+Click the image below to access the BCHC data platform:
 
-[![](bchc_logo_big.png)](http://www.bigcitieshealth.org/)
+[![](bchc_logo_big.png)](http://www.bigcitieshealth.org/city-data)
 </center>
 
 ### Title {.no-title}
 <center>
-Cities included in the BCHC. Click the map below for more information on city membership criteria. 
+Cities included in the BCHC. Click the map below for more information on city membership. 
 
-[![](cities_map.png)](http://www.bigcitieshealth.org/about-us-big-cities-health-coalition-bchc)
+[![](cities_map.png)](http://www.bigcitieshealth.org/our-members-big-cities-health-coalition-bchc/)
 </center>
 
 Row {data-height=90}
@@ -54,7 +56,7 @@ Row {data-height=300}
 -----------------------------------------------------------------------
 ### Title {.no-title}
 <center>
-*Obesity Rates*
+*Obesity Rate*
 
 [![](obesity.png)](http://www.bigcitieshealth.org/obesity-physical-activity)
 </center>
