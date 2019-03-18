@@ -95,7 +95,7 @@ data_filt <- data_raw %>%
 
 Sidebar {.sidebar}
 -------------------------------
-**Plot #1**
+**Visualization #1**
 
 This plot represents obesity rates per city averaged across all years in the dataset (2010-2018).
 
@@ -210,7 +210,7 @@ data_obesity %>%
 
 Sidebar {.sidebar}
 -------------------------------
-Second plot text
+**Visualization #2**
 
 ```{r}
 # wrangle data
@@ -281,7 +281,7 @@ obesity_hdmr %>%
 
 Sidebar {.sidebar}
 -------------------------------
-Second plot text
+**Visualization #3**
 
 
 ```{r}
