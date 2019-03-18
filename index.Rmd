@@ -131,7 +131,7 @@ data_obesity %>%
   coord_flip() +
   scale_y_continuous(labels = scales::percent_format(scale = 1)) + 
   scale_fill_manual(values = c("#BA4A00", "black", "#ABCFF7")) +
-  labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL, caption = "States above the U.S. average are colored red. States below the U.S. average are colored green.") + 
+  labs(title = "Percent of Adults Who Are Obese", subtitle = "Average obesity rates for each city from 2010-2018", y = "Percent Obese", x = NULL, caption = "Vertical line represents the U.S. average.\n States above/below the U.S. average are colored red/blue, respectively.") + 
   theme_minimal() + 
   geom_hline(yintercept = data_obesity$avg_obesity[which(data_obesity$place == "U.S. Total")], linetype = 2) + 
   theme(legend.position = "none")
@@ -178,7 +178,7 @@ data_obesity %>%
   coord_flip() +
   scale_y_continuous(labels = scales::percent_format(scale = 1)) + 
   scale_color_manual(values = c("#BA4A00", "black", "#ABCFF7")) +
-  labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL, caption = "States above the U.S. average are colored red. States below the U.S. average are colored green.") + 
+  labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL) + 
   theme_minimal() + 
   geom_hline(yintercept = data_obesity$avg_obesity[which(data_obesity$place == "U.S. Total")], linetype = 2) + 
   theme(legend.position = "none")
@@ -201,7 +201,7 @@ data_obesity %>%
   coord_flip() +
   scale_y_continuous(labels = scales::percent_format(scale = 1)) + 
   scale_color_manual(values = c("#BA4A00", "black", "#ABCFF7")) +
-  labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL, caption = "States above the U.S. average are colored red. States below the U.S. average are colored green.") + 
+  labs(title = "Percent of Adults Who Are Obese", y = "Percent", x = NULL) + 
   theme_minimal() + 
   geom_hline(yintercept = data_obesity$avg_obesity[which(data_obesity$place == "U.S. Total")], linetype = 2) + 
   theme(legend.position = "none")
