@@ -97,12 +97,14 @@ Sidebar {.sidebar}
 -------------------------------
 **Visualization #1**
 
-This plot represents obesity rates per city averaged across all years in the dataset (2010-2018).
+This plot represents average obesity rates for adults (18 years and over) across all years in the dataset (2010-2018) for each city. In general, obesity is defined as Body Mass Index (BMI) of 30 or greater. This plot includes data for all races and genders. The average obesity rate for the entire U.S. is represented by the black bar.     
 
 ```{r, warning}
 # wrangle data
 data_obesity <- data_filt %>% 
-  filter(shortened_indicator_name == "Adult Obesity") %>% 
+  filter(shortened_indicator_name == "Adult Obesity",
+         sex == "Both",
+         race_ethnicity == "All") %>% 
   spread(shortened_indicator_name, value) %>% 
   group_by(place) %>% 
   summarise(avg_obesity = mean(`Adult Obesity`, na.rm = TRUE),
@@ -131,7 +133,6 @@ data_obesity %>%
   theme_minimal() + 
   geom_hline(yintercept = data_obesity$avg_obesity[which(data_obesity$place == "U.S. Total")], linetype = 2) + 
   theme(legend.position = "none")
-
 ```
 
 Column {.tabset data-width=350}
