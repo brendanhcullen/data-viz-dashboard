@@ -97,7 +97,9 @@ Sidebar {.sidebar}
 -------------------------------
 **Visualization #1**
 
-This plot represents average obesity rates for adults (18 years and over) across all years in the dataset (2010-2018) for each city. In general, obesity is defined as Body Mass Index (BMI) of 30 or greater. This plot includes data for all races and genders. The average obesity rate for the entire U.S. is represented by the black bar.     
+This plot represents average obesity rates for adults (18 years and over) across all years in the dataset (2010-2018) for each city. Here, obesity rate refers to the percentage of the population that meets criteria for obesity. In general, obesity is defined in this dataset as [Body Mass Index (BMI)](https://www.cdc.gov/healthyweight/assessing/bmi/index.html) of 30 or greater. This plot includes data for all races and both males and females. The average obesity rate for the entire U.S. is represented by the black bar. States that have higher obesity rates than the national average are colored red, and states below the national average are colored blue. From this plot, it is easy to discern that Detroit, MI had the highest average obesity rate from 2010-2018, while San Francisco, CA had the lowest average obesity rate during this time frame.
+
+This plot is intended for a general audience. See the plots on the right for different iterations of this visualization. 
 
 ```{r, warning}
 # wrangle data
@@ -213,6 +215,8 @@ Sidebar {.sidebar}
 -------------------------------
 **Visualization #2**
 
+See the plots on the right for different iterations of this visualization. 
+
 ```{r}
 # wrangle data
 obesity_hdmr <- data_filt %>%
@@ -284,6 +288,7 @@ Sidebar {.sidebar}
 -------------------------------
 **Visualization #3**
 
+See the plots on the right for different iterations of this visualization. 
 
 ```{r}
 # wrangle data
