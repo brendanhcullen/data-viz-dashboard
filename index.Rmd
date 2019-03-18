@@ -243,9 +243,9 @@ bottom_3_obese <- obesity_hdmr %>%
 
 obesity_hdmr %>% 
   ggplot(aes(avg_obesity, avg_hdmr)) + 
-  geom_point(size = 5, alpha = 0.7, color = "gray70") +
-  geom_point(data = top_3_obese, size = 5, color = "#BA4A00", alpha = 0.5) +
-  geom_point(data = bottom_3_obese, size = 5, color = "#ABCFF7", alpha= 0.5) +
+  geom_point(size = 5, alpha = 0.5, color = "gray70") +
+  geom_point(data = top_3_obese, size = 5, color = "#BA4A00", alpha = 0.7) +
+  geom_point(data = bottom_3_obese, size = 5, color = "#ABCFF7", alpha= 0.7) +
   geom_smooth(method = "lm", alpha = 0.2, color = "gray60") +
   geom_text_repel(data = top_3_obese, aes(label = place), min.segment.length = 0) +
   geom_text_repel(data = bottom_3_obese, aes(label = place), min.segment.length = 0) +
