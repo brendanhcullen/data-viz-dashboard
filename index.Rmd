@@ -200,7 +200,7 @@ Sidebar {.sidebar}
 
 This plot shows the relationship between average adult obesity rates and average heart disease mortality rates at the city level, collapsed across all years available in the dataset (2010-2018). Again, obesity rate refers to the percentage of adults with BMI ≥30. Heart disease mortality rate refers to the number of individuals per 100,000 who have died from heart disease. This variable is age-adjusted, likely to account for the fact that risk for heart complications such as heart attack, stroke or coronary heart disease [increases with age](https://www.nia.nih.gov/health/heart-health-and-aging){target="_blank"}. This plot includes data for all races and genders. From this graph, we can see that cities with higher obesity rates tend to also have higher heart disease mortality rates. This is not at all surprising, given the evidence that [obesity increases the risk for cardiovascular disease](https://www.obesityaction.org/community/article-library/cardiovascular-disease-obesity-and-the-heart/){target="_blank"}. 
 
-This plot is intended for more of a scientific audience, as it communicates a statistical relationship between two variables. See the plots on the right for different iterations of this visualization. 
+This plot is intended for more of a scientific audience, as it communicates a statistical relationship between two variables, but it should still be understandable to a general audience. See the plots on the right for different iterations of this visualization. 
 
 ```{r}
 # wrangle data
@@ -243,7 +243,6 @@ obesity_hdmr %>%
   labs(x = "Percent of Adults Who Are Obese", y = "Heart Disease Mortality Rate", title = "Relationship between Obesity and Heart Disease", subtitle = "Data from 2010-2018", caption = "3 most/least obese cities are labeled and colored red/blue, respectively.\nHeart disease mortality rates age adjusted; per 100,000 people.")
 ```
 
-
 Column {.tabset data-width=350}
 -----------------------------------------------------------------------
 
@@ -256,6 +255,8 @@ obesity_hdmr %>%
   geom_smooth(method = "lm")
 ```
 
+> Here is a rough n' dirty plot of the relationship between these two variables. The relationship between obesity and heart disease is already clear, but there are several things we could do improve the visual appeal and intuitiveness of the graph. For starters, we can add a `theme_minimal` to get rid of the gray background and add labels to the points so we know which cities are which. 
+
 ### Version 2
 
 ```{r}
@@ -266,6 +267,8 @@ obesity_hdmr %>%
   geom_text_repel(aes(label = place)) + 
   theme_minimal()
 ```
+
+> Here I used `ggrepel` to label the points since the labels would otherwise overlap quite a bit and likely be difficult to read. However, this makes the graph look really cluttered. So, instead of labeling all of the cities, let's instead just label the top and bottom 3 cities in terms of obesity rates. 
 
 ### Version 3
 
@@ -279,6 +282,7 @@ obesity_hdmr %>%
   theme_minimal()
 ```
 
+> Now only the 3 most/least obese cities are labeled. At this point, there are still several things we could do to improve the plot. First, we need to add a descriptive title and caption and use better axis labels. We can also increase the size of the points and reduce the transparency of the regression line and confidence interval so it doesn't obscure the labels as much. To be consistent with our last graph, we can also color the 3 most obese cities red and the 3 least obese cities blue and make the rest of the points light gray so the colored points stick out more. 
 
 # Opioid Deaths x Gender {data-icon="fa-tablets"}
 
@@ -286,7 +290,9 @@ Sidebar {.sidebar}
 -------------------------------
 **Visualization #3**
 
-See the plots on the right for different iterations of this visualization. 
+This plot communicates gender differences in opioid-related overdose mortality rates in Colombus, OH from 2010 to 2016. As with heart disease mortality rate, opioid-related overdose mortality rate is age-adjusted and refers to the number of individuals per 100,000 who have died from overdosing on opioids. I chose to focus on data only from Colombus, as this was the city in this dataset with the highest average opioid-related overdose mortality rate during this time period (see Source Code for how this was determined). From this plot, we can see that there was a general increase in opioid-related deaths in Colombus beginning from around 2014-2016 and that this increase was more pronounced for males compared to females. This gender difference seems to be consistent with patterns for both the [the state of Ohio in general](https://www.kff.org/other/state-indicator/opioid-overdose-deaths-by-gender/?dataView=2&activeTab=graph&currentTimeframe=1&startTimeframe=7&selectedDistributions=male--female&selectedRows=%7B%22states%22:%7B%22ohio%22:%7B%7D%7D%7D&sortModel=%7B%22colId%22:%22Location%22,%22sort%22:%22asc%22%7D){target="_blank"} and [the U.S. as a whole](https://www.kff.org/other/state-indicator/opioid-overdose-deaths-by-gender/?dataView=2&activeTab=graph&currentTimeframe=1&startTimeframe=7&selectedDistributions=male--female&selectedRows=%7B%22wrapups%22:%7B%22united-states%22:%7B%7D%7D%7D&sortModel=%7B%22colId%22:%22Location%22,%22sort%22:%22asc%22%7D){target="_blank} during this time period. 
+
+This plot is inteded for a general audience, as the recent [opioid epidemic](https://www.hhs.gov/opioids/about-the-epidemic/index.html){target="_blank"} in the U.S. is of broad concern and interest. See the plots on the right for different iterations of this visualization. 
 
 ```{r}
 # wrangle data
@@ -327,7 +333,7 @@ data_opioid %>%
   ggplot(aes(year, `Opioid-Related Overdose Mortality Rate`, color= sex)) + 
   geom_line(size= 2) +
   geom_point(size = 4) + 
-  labs(x = NULL, y = "Opioid-Related Overdose Mortality Rate", title = "Opioid-use Related Mortality Rates Over Time", subtitle = "Colombus, OH", caption = "Rates are age-adjusted per 100,000 people.") + 
+  labs(x = NULL, y = "Opioid-Related Overdose Mortality Rate", title = "Opioid-use Related Mortality Rates Over Time", subtitle = "Data from Colombus, OH: 2010-2016", caption = "Rates are age-adjusted per 100,000 people.") + 
   theme_minimal() + 
   scale_color_OkabeIto() +
   theme(legend.position = "none") +
