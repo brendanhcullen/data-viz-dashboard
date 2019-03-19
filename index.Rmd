@@ -412,4 +412,4 @@ data_opioid %>%
          size = 5) 
 ```
 
-> Now, we need to still add a descriptive caption to help us better interpret the units of the `Opioid-use Related Mortality Rate` variable. To make the graph a little more colorblind friendly, we can use `colorblindr::scale_color_OkabeIto` to ensure that the two lines are the easy to distinguish. Finally, since this data only spans 7 years, it would be better to label each of years on the x axis instead of skipping every other year, which adds more detailed information without making the graph look too cluttered. 
+> Now, we need to still add a descriptive caption to help us better interpret the units of the `Opioid-use Related Mortality Rate` variable. To make the graph a little more colorblind friendly, we can use `colorblindr::scale_color_OkabeIto` to ensure that the two lines are the easy to distinguish. Finally, since this data only spans 7 years, it would be better to label every single year on the x axis instead of skipping every other year, which adds more detailed information without making the graph look too cluttered. 
