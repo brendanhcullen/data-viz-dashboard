@@ -134,7 +134,8 @@ data_obesity %>%
   labs(title = "Average Obesity Rates per City", subtitle = "Data from 2010-2018", y = "Percent of Adults Who Are Obese", x = NULL, caption = "Vertical line represents the U.S. average.\n States above/below the U.S. average are colored red/blue, respectively.") + 
   theme_minimal() + 
   geom_hline(yintercept = data_obesity$avg_obesity[which(data_obesity$place == "U.S. Total")], linetype = 2) + 
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        panel.grid.major.y = element_blank())
 ```
 
 Column {.tabset data-width=350}
@@ -184,7 +185,7 @@ data_obesity %>%
   theme(legend.position = "none")
 ```
 
-> Now we have a simple color scheme that quickly tells us whether a given city is above or below the U.S. average in terms of its obesity rates. Adding a vertical line at the U.S. average also makes it easier to visually compare *how much* each city is above/below the national average. Here I'm also trying out a lollipop plot just for fun. Ultimately, I think a bar plot looks cleaner and makes the colors easier to discern. We can also make the title and axis label more informative and add a caption to explain the color coding.
+> Now we have a simple color scheme that quickly tells us whether a given city is above or below the U.S. average in terms of its obesity rates. Adding a vertical line at the U.S. average also makes it easier to visually compare *how much* each city is above/below the national average. Here I'm also trying out a lollipop plot just for fun. Ultimately, I think a bar plot looks cleaner and makes the colors easier to discern. We can also make the title and axis label more informative and add a caption to explain the color coding. Lastly, we can remove the horizonal grid lines, as they don't add any utility to the visualization and cause unnecessary visual "clutter."
 
 # Heart Disease x Obesity {data-icon="fa-heartbeat"}
 
