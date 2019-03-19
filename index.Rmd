@@ -32,6 +32,7 @@ This project includes only a tiny fraction of the available BCHC data, focusing 
 Row {data-height=600}
 -----------------------------------------------------------------------
 ### Title {.no-title}
+
 <center>
 Click the image below to access the BCHC data platform:
 
@@ -39,6 +40,7 @@ Click the image below to access the BCHC data platform:
 </center>
 
 ### Title {.no-title}
+
 <center>
 Cities included in the BCHC. Click the map below for more information on city membership. 
 
@@ -50,6 +52,7 @@ Row {data-height=90}
 ### Title {.no-title}
 <center>
 **KEY VARIABLES OF INTEREST:**
+</center>
 
 
 Row {data-height=300}
@@ -97,7 +100,7 @@ Sidebar {.sidebar}
 -------------------------------
 **Visualization #1**
 
-This plot represents average obesity rates for adults (18 years and over) across all years in the dataset (2010-2018) for each city. Here, obesity rate refers to the percentage of the population that meets criteria for obesity. In general, obesity is defined in this dataset as [Body Mass Index (BMI)](https://www.cdc.gov/healthyweight/assessing/bmi/index.html) of 30 or greater. This plot includes data for all races and genders. The average obesity rate for the entire U.S. is represented by the black bar. States that have higher obesity rates than the national average are colored red, and states below the national average are colored blue. From this plot, it is easy to discern that Detroit, MI had the highest average obesity rate from 2010-2018, while San Francisco, CA had the lowest average obesity rate during this time frame.
+This plot represents average obesity rates for adults (18 years and over) across all years in the dataset (2010-2018) for each city. Here, obesity rate refers to the percentage of the population that meets criteria for obesity. In general, obesity is defined in this dataset as [Body Mass Index (BMI)](https://www.cdc.gov/healthyweight/assessing/bmi/index.html){target="_blank"} of 30 or greater. This plot includes data for all races and genders. The average obesity rate for the entire U.S. is represented by the black bar. States that have higher obesity rates than the national average are colored red, and states below the national average are colored blue. From this plot, it is easy to discern that Detroit, MI had the highest average obesity rate from 2010-2018, while San Francisco, CA had the lowest average obesity rate during this time frame.
 
 This plot is intended for a general audience. See the plots on the right for different iterations of this visualization.
 
@@ -193,9 +196,9 @@ Sidebar {.sidebar}
 -------------------------------
 **Visualization #2**
 
-This plot shows the relationship between average adult obesity rates and average heart disease mortality rates at the city level over the course of all years available in the dataset (2010-2018). Again, obesity rate refers to the percentage of adults with BMI ≥30. Heart disease mortality rate refers to the number of individuals per 100,000 people who have died from heart disease, and this variable is age-adjusted. This plot includes data for all races and genders. 
+This plot shows the relationship between average adult obesity rates and average heart disease mortality rates at the city level, collapsed across all years available in the dataset (2010-2018). Again, obesity rate refers to the percentage of adults with BMI ≥30. Heart disease mortality rate refers to the number of individuals per 100,000 who have died from heart disease. This variable is age-adjusted, likely to account for the fact that risk for heart complications such as heart attack, stroke or coronary heart disease [increases with age](https://www.nia.nih.gov/health/heart-health-and-aging){target="_blank"}. This plot includes data for all races and genders. From this graph, we can see that cities with higher obesity rates tend to also have higher heart disease mortality rates. This is not at all surprising, given the evidence that [obesity increases the risk for cardiovascular disease](https://www.obesityaction.org/community/article-library/cardiovascular-disease-obesity-and-the-heart/){target="_blank"}. 
 
-See the plots on the right for different iterations of this visualization. 
+This plot is intended for more of a scientific audience, as it communicates a statistical relationship between two variables. See the plots on the right for different iterations of this visualization. 
 
 ```{r}
 # wrangle data
