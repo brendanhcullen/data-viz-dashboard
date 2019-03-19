@@ -333,7 +333,7 @@ data_opioid %>%
   ggplot(aes(year, `Opioid-Related Overdose Mortality Rate`, color= sex)) + 
   geom_line(size= 2) +
   geom_point(size = 4) + 
-  labs(x = NULL, y = "Opioid-Related Overdose Mortality Rate", title = "Opioid-use Related Mortality Rates Over Time", subtitle = "Data from Colombus, OH: 2010-2016", caption = "Rates are age-adjusted per 100,000 people.") + 
+  labs(x = NULL, y = "Opioid-Related Overdose Mortality Rate", title = "Opioid-use Related Mortality Rates Over Time", subtitle = "Data from Colombus, OH", caption = "Opioid-use related mortality rates age-adjusted; per 100,000 people.") + 
   theme_minimal() + 
   scale_color_OkabeIto() +
   theme(legend.position = "none") +
@@ -345,7 +345,9 @@ data_opioid %>%
          spread(shortened_indicator_name, value), 
          aes(y =`Opioid-Related Overdose Mortality Rate`, label = sex),
          nudge_x = -0.7,
-         size = 5) 
+         size = 5) + 
+  scale_x_continuous(breaks = scales::pretty_breaks(n=7)) + 
+  theme(panel.grid.minor.x = element_blank())
 ```
 
 Column {.tabset data-width=350}
@@ -364,6 +366,7 @@ data_opioid %>%
   geom_line() 
 ```
 
+> Here is the raw first-pass plot. Removing the gray background with `theme_minimal` would help to see the line colors better. We can also remove the `year` label on the x axis, as it is not necessary. It would also look better to make the lines a bit thicker and add a `geom_point` so we can more easily discern discrete data points for each year. The graph also needs a title.   
 
 ### Version 2
 
@@ -377,7 +380,36 @@ data_opioid %>%
   ggplot(aes(year, `Opioid-Related Overdose Mortality Rate`, color= sex)) + 
   geom_line(size= 2) +
   geom_point(size = 4) + 
-  labs(x = NULL, y = "Opioid-Related Overdose Mortality Rate", title = "Opioid-use Related Mortality Rates Over Time", subtitle = "Colombus, OH", caption = "Rates are age-adjusted per 100,000 people.") + 
+  labs(x = NULL, y = "Opioid-Related Overdose Mortality Rate", title = "Opioid-use Related Mortality Rates Over Time", subtitle = "Colombus, OH") + 
   theme_minimal() 
 ```
 
+> It's looking a bit better. However, since we have only two groups that we're plotting (males and females), it would reduce the cognitive load of the graph to get rid of the legend and simply label the lines directly. 
+
+### Version 3
+
+```{r}
+data_opioid %>% 
+  filter(sex != "Both", 
+         race_ethnicity == "All",
+         place == top_opioid$place,
+         year %in% 2010:2016) %>% 
+  spread(shortened_indicator_name, value) %>% 
+  ggplot(aes(year, `Opioid-Related Overdose Mortality Rate`, color= sex)) + 
+  geom_line(size= 2) +
+  geom_point(size = 4) + 
+  labs(x = NULL, y = "Opioid-Related Overdose Mortality Rate", title = "Opioid-use Related Mortality Rates Over Time", subtitle = "Colombus, OH") + 
+  theme_minimal() +
+  theme(legend.position = "none") +
+  geom_label(data = data_opioid %>% 
+  filter(sex != "Both", 
+         race_ethnicity == "All",
+         place == top_opioid$place,
+         year == 2016) %>% 
+         spread(shortened_indicator_name, value), 
+         aes(y =`Opioid-Related Overdose Mortality Rate`, label = sex),
+         nudge_x = -0.7,
+         size = 5) 
+```
+
+> Now, we need to still add a descriptive caption to help us better interpret the units of the `Opioid-use Related Mortality Rate` variable. To make the graph a little more colorblind friendly, we can use `colorblindr::scale_color_OkabeIto` to ensure that the two lines are the easy to distinguish. Finally, since this data only spans 7 years, it would be better to label each of years on the x axis, which adds more detailed information without making the graph look too cluttered. 
