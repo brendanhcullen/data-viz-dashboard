@@ -97,7 +97,7 @@ Sidebar {.sidebar}
 -------------------------------
 **Visualization #1**
 
-This plot represents average obesity rates for adults (18 years and over) across all years in the dataset (2010-2018) for each city. Here, obesity rate refers to the percentage of the population that meets criteria for obesity. In general, obesity is defined in this dataset as [Body Mass Index (BMI)](https://www.cdc.gov/healthyweight/assessing/bmi/index.html) of 30 or greater. This plot includes data for all races and both males and females. The average obesity rate for the entire U.S. is represented by the black bar. States that have higher obesity rates than the national average are colored red, and states below the national average are colored blue. From this plot, it is easy to discern that Detroit, MI had the highest average obesity rate from 2010-2018, while San Francisco, CA had the lowest average obesity rate during this time frame.
+This plot represents average obesity rates for adults (18 years and over) across all years in the dataset (2010-2018) for each city. Here, obesity rate refers to the percentage of the population that meets criteria for obesity. In general, obesity is defined in this dataset as [Body Mass Index (BMI)](https://www.cdc.gov/healthyweight/assessing/bmi/index.html) of 30 or greater. This plot includes data for all races and genders. The average obesity rate for the entire U.S. is represented by the black bar. States that have higher obesity rates than the national average are colored red, and states below the national average are colored blue. From this plot, it is easy to discern that Detroit, MI had the highest average obesity rate from 2010-2018, while San Francisco, CA had the lowest average obesity rate during this time frame.
 
 This plot is intended for a general audience. See the plots on the right for different iterations of this visualization.
 
@@ -192,6 +192,8 @@ Sidebar {.sidebar}
 -------------------------------
 **Visualization #2**
 
+This plot shows the relationship between average adult obesity rates and average heart disease mortality rates at the city level over the course of all years available in the dataset (2010-2018). Again, obesity rate refers to the percentage of adults with BMI ≥30. Heart disease mortality rate refers to the number of individuals per 100,000 people who have died from heart disease, and this variable is age-adjusted. This plot includes data for all races and genders. 
+
 See the plots on the right for different iterations of this visualization. 
 
 ```{r}
@@ -232,7 +234,7 @@ obesity_hdmr %>%
   geom_text_repel(data = bottom_3_obese, aes(label = place), min.segment.length = 0) +
   theme_minimal() + 
   scale_x_continuous(labels = scales::percent_format(scale = 1)) + 
-  labs(x = "Percent Obese", y = "Heart Disease Mortality Rate", title = "Relationship between Obesity and Heart Disease", caption = "3 most/least obese states are labeled and colored red/blue, respectively.")
+  labs(x = "Percent Obese", y = "Heart Disease Mortality Rate", title = "Relationship between Obesity and Heart Disease", caption = "3 most/least obese states are labeled and colored red/blue, respectively.\nHeart Disease Mortality Rate age adjusted; per 100,000 people.")
 ```
 
 
