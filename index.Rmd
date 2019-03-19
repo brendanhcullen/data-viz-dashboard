@@ -6,6 +6,7 @@ output:
     vertical_layout: fill
     social: menu
     source_code: embed
+    favicon: bchc_logo_favicon.png
 ---
 
 ```{r setup, include=FALSE}
