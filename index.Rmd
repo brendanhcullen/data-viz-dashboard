@@ -259,6 +259,19 @@ obesity_hdmr %>%
   theme_minimal()
 ```
 
+### Version 3
+
+```{r}
+obesity_hdmr %>% 
+  ggplot(aes(avg_obesity, avg_hdmr)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  geom_text_repel(data = top_3_obese, aes(label = place), min.segment.length = 0) +
+  geom_text_repel(data = bottom_3_obese, aes(label = place), min.segment.length = 0) +
+  theme_minimal()
+```
+
+
 # Opioid Deaths x Gender {data-icon="fa-tablets"}
 
 Sidebar {.sidebar}
