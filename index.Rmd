@@ -232,7 +232,7 @@ obesity_hdmr %>%
   geom_text_repel(data = bottom_3_obese, aes(label = place), min.segment.length = 0) +
   theme_minimal() + 
   scale_x_continuous(labels = scales::percent_format(scale = 1)) + 
-  labs(x = "Percent Obese", y = "Heart Disease Mortality Rate", title = "Relationship between Obesity and Heart Disease", subtitle = "State labels represent 3 most/least obese states", caption = "3 most/least obese states are colored red/green, respectively. \n Heart Disease Mortality Rate is age-adjusted per 100,000 people.")
+  labs(x = "Percent Obese", y = "Heart Disease Mortality Rate", title = "Relationship between Obesity and Heart Disease", caption = "3 most/least obese states are labeled and colored red/blue, respectively.")
 ```
 
 
