@@ -83,7 +83,7 @@ data_raw <- import("http://bchi.bigcitieshealth.org/rails/active_storage/blobs/e
 data_filt <- data_raw %>% 
   clean_names() %>% 
   select(shortened_indicator_name, year, sex, race_ethnicity, value, place) %>% 
-  filter(shortened_indicator_name %in% c("Adult Physical Activity Levels", "Teen Physical Activity Levels", "Adult Binge Drinking","Adult Obesity","Heart Disease Mortality Rate","Bike Score","Walkability","Median Household Income","Race/Ethnicity","Death Rate (Overall)")) %>% 
+  filter(shortened_indicator_name %in% c("Adult Obesity","Heart Disease Mortality Rate","Race/Ethnicity", "Sex", "Opioid-related Overdose Mortality Rate")) %>% 
   mutate(value = as.numeric(value)) %>% 
   mutate_at(c("sex", "race_ethnicity", "place"), factor) %>% 
  mutate(place = plyr::mapvalues(x = .$place, from = c("Fort Worth (Tarrant County), TX", "Indianapolis (Marion County), IN", "Las Vegas (Clark County), NV", "Miami (Miami-Dade County), FL", "Oakland (Alameda County), CA", "Portland (Multnomah County), OR"), to = c("Fort Worth, TX", "Indianapolis, IN", "Las Vegas, NV", "Miami, FL", "Oakland, CA", "Portland, OR"))) %>% 
